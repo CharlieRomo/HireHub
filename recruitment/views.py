@@ -5,7 +5,7 @@ from .forms import JobPostingForm, CompanyProfileForm, CustomUserCreationForm, I
 from .models import *  # Importar el modelo CustomUser
 from django.contrib.auth.decorators import login_required
 from .models import JobPosting, JobApplication
-
+#hola
 # Vista para solicitar restablecimiento de contraseña
 def request_password_reset(request):
     if request.method == "POST":
