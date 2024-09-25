@@ -1,0 +1,17 @@
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+<meta charset="UTF-8">
+<h2>Iniciar sesión</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Iniciar sesión</button>
+</form>
+
+<p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
+
+<!-- Enlace para restablecer la contraseña -->
+<p>¿Olvidaste tu contraseña? <a href="{% url 'request_password_reset' %}">Restablecer contraseña</a></p>

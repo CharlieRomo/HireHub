@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Bienvenido, {{ user.company_name }}</h2>
+
+  <div class="profile-menu">
+    <ul>
+      <li><a href="{% url 'edit_company_profile' %}">Editar Perfil de Empresa</a></li>
+      <li><a href="{% url 'create_job_posting' %}">Crear Vacante</a></li>
+      <li><a href="{% url 'my_job_postings' %}">Mis Vacantes</a>
+        <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Cerrar sesión</button>
+      </form>
+      
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h3>Mis Vacantes</h3>
+    <p>En esta sección puedes ver las vacantes publicadas por tu empresa.</p>
+  </div>
+
+{% endblock %}
+
+<!-- Formulario para cerrar sesión -->
+<form action="{% url 'logout' %}" method="POST" style="display: inline;">
+  {% csrf_token %}
+  <button type="submit">Cerrar sesión</button>
+</form>

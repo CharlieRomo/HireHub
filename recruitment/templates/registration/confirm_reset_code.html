@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Confirmar código de restablecimiento</h2>
+<p>Ingrese el código que se le ha generado.</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="email">Correo electrónico:</label>
+    <input type="email" name="email" value="{{ email }}" required>
+
+    <label for="code">Código de restablecimiento:</label>
+    <input type="text" name="code" required>
+    
+    <button type="submit">Confirmar código</button>
+</form>
+
+<p>El código de restablecimiento generado es: <strong>{{ reset_code }}</strong></p>
+
+{% if messages %}
+  <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

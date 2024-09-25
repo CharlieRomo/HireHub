@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Bienvenido, {{ user.first_name }} {{ user.last_name }}</h2>
+
+  <div class="profile-menu">
+    <ul>
+      <li><a href="{% url 'edit_intern_profile' %}">Editar Perfil</a></li>
+      <li><a href="{% url 'intern_home' %}">Mis postulaciones</a></li>
+      <li><a href="{% url 'list_jobs' %}">Ver Vacantes Disponibles</a></li>
+      <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+    
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h3>Mis Postulaciones</h3>
+    <ul>
+      {% for application in applications %}
+        <li>
+          <strong>{{ application.job.title }}</strong><br>
+          Estado: {{ application.status }}<br>
+          <!-- Medidor de progreso -->
+          <div class="progress-bar">
+            <div class="progress" style="width: 
+              {% if application.status == 'applied' %}25%
+              {% elif application.status == 'interview' %}50%
+              {% elif application.status == 'rejected' %}100%
+              {% elif application.status == 'hired' %}100%
+              {% endif %};
+            "></div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

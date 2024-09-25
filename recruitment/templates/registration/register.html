@@ -1,0 +1,13 @@
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+<meta charset="UTF-8">
+<h2>Registro de usuario</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}  <!-- Mostrar errores generales -->
+  {{ form.as_p }}  <!-- Mostrar los campos del formulario -->
+  <button type="submit">Registrarse</button>
+</form>

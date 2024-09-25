@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% endblock %}
+
+{% block content %}
+  <h2>Editar Perfil de Becario</h2>
+  
+  <!-- Formulario para editar el perfil del becario -->
+  <form method="POST">
+    {% csrf_token %}
+    
+    <!-- Campo para estudios -->
+    <div>
+      <label for="education">Estudios:</label>
+      {{ form.education }}  <!-- Renderiza el campo con su etiqueta de ayuda -->
+      {{ form.education.errors }} <!-- Muestra errores si los hay -->
+    </div>
+
+    <!-- Campo para experiencia laboral -->
+    <div>
+      <label for="work_experience">Experiencia laboral:</label>
+      {{ form.work_experience }}  <!-- Renderiza el campo -->
+      {{ form.work_experience.errors }} <!-- Muestra errores si los hay -->
+    </div>
+
+    <!-- Campo para habilidades -->
+    <div>
+      <label for="skills">Habilidades:</label>
+      {{ form.skills }}  <!-- Renderiza el campo -->
+      {{ form.skills.errors }} <!-- Muestra errores si los hay -->
+    </div>
+
+    <!-- Campo para idiomas -->
+    <div>
+      <label for="languages">Idiomas:</label>
+      {{ form.languages }}  <!-- Renderiza el campo -->
+      {{ form.languages.errors }} <!-- Muestra errores si los hay -->
+    </div>
+
+    <!-- Certificaciones -->
+    <div>
+      <label for="certifications">Certificaciones:</label>
+      {{ form.certifications }}  <!-- Renderiza el campo -->
+      {{ form.certifications.errors }} <!-- Muestra errores si los hay -->
+    </div>
+    
+
+    <!-- Botón para guardar los cambios -->
+    <button type="submit">Guardar</button>
+  </form>
+  
+  <!-- Mostrar los mensajes de éxito o error -->
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>  <!-- Mostrar el mensaje con su clase correspondiente -->
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+{% endblock %}

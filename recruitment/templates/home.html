@@ -1,0 +1,22 @@
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+<meta charset="UTF-8">
+<h1>Página principal de HireHub</h1>
+<p>Bienvenido a la plataforma de reclutamiento HireHub.</p>
+
+<!-- Misión y Visión -->
+<section>
+  <h2>Misión</h2>
+  <p>Nuestra misión en HireHub es conectar a los mejores talentos con las empresas más innovadoras, proporcionando una plataforma eficiente y accesible que facilita la búsqueda de empleo y el reclutamiento de profesionales altamente capacitados.</p>
+
+  <h2>Visión</h2>
+  <p>Ser la plataforma de referencia global en soluciones de empleo, revolucionando la manera en que las personas y las empresas se conectan, apoyando el desarrollo profesional y creando oportunidades para un futuro laboral más inclusivo y dinámico.</p>
+</section>
+
+<form action="{% url 'login' %}" method="POST" style="display: inline;">
+  {% csrf_token %}
+  <button type="submit">Iniciar sesión</button>
+</form>

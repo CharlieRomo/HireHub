@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Vacantes Disponibles</h2>
+  <ul>
+    {% for job in jobs %}
+      <li>
+        <strong>{{ job.title }}</strong><br>
+        {{ job.description }}<br>
+        <a href="{% url 'job_detail' job.id %}">Ver detalles</a>
+        <!-- Botón para postularse -->
+        <form action="{% url 'apply_job' job.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">Postularme</button>
+      </form>
+      
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

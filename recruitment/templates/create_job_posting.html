@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Crear nueva vacante</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Esto renderiza el formulario completo con etiquetas <p> -->
+    <button type="submit">Publicar Vacante</button>
+</form>
+
+{% endblock %}

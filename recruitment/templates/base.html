@@ -1,0 +1,52 @@
+
+
+{% load static %}  <!-- Cargar la biblioteca de etiquetas estáticas de Django -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireHub</title>
+    <!-- Enlace a archivos estáticos como CSS -->
+    <link rel="stylesheet" href="{% static 'path/to/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>HireHub</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <!-- Mostrar diferentes opciones según si el usuario está autenticado -->
+                {% if user.is_authenticated %}
+                    
+                    <li><a href="{% url 'edit_intern_profile' %}">Mi perfil</a></li> <!-- Puedes personalizar según el tipo de usuario -->
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    <li><a href="{% url 'register' %}">Registro</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Bloque para mostrar los mensajes de éxito o error -->
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <!-- Aquí irán los bloques de contenido específicos de cada plantilla -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>HireHub © 2024</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ job_posting.title }}</h2>
+<p>{{ job_posting.description }}</p>
+<p><strong>Requisitos:</strong> {{ job_posting.requirements }}</p>
+<p>Publicado el: {{ job_posting.created_at|date:"d M Y" }}</p>
+<a href="{% url 'my_job_postings' %}">Volver a mis vacantes</a>
+{% endblock %}
