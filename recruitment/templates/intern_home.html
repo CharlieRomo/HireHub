@@ -1,18 +1,20 @@
-{% extends "base.html" %}
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/intern-home.css' %}">
+{% endblock %}
 
 {% block content %}
+  
   <h2>Bienvenido, {{ user.first_name }} {{ user.last_name }}</h2>
 
   <div class="profile-menu">
     <ul>
       <li><a href="{% url 'edit_intern_profile' %}">Editar Perfil</a></li>
-      <li><a href="{% url 'intern_home' %}">Mis postulaciones</a></li>
       <li><a href="{% url 'list_jobs' %}">Ver Vacantes Disponibles</a></li>
       <form action="{% url 'logout' %}" method="POST" style="display:inline;">
         {% csrf_token %}
         <button type="submit">Cerrar sesión</button>
-    </form>
-    
+      </form>
     </ul>
   </div>
 
@@ -30,11 +32,11 @@
               {% elif application.status == 'interview' %}50%
               {% elif application.status == 'rejected' %}100%
               {% elif application.status == 'hired' %}100%
-              {% endif %};
-            "></div>
+              {% endif %};"></div>
           </div>
         </li>
       {% endfor %}
     </ul>
   </div>
+
 {% endblock %}

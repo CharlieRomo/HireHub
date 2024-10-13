@@ -1,0 +1,69 @@
+/* Estilo general para el cuerpo */
+body {
+     font-family: Arial, sans-serif; /* Fuente del cuerpo */
+     background-color: #f4f4f4; /* Color de fondo */
+     color: #333; /* Color del texto */
+     margin: 0; /* Sin margen */
+     padding: 0; /* Sin padding */
+     display: flex; /* Flexbox para centrar el contenido */
+     justify-content: center; /* Centrar horizontalmente */
+     align-items: center; /* Centrar verticalmente */
+     height: 100vh; /* Altura de la ventana */
+ }
+ 
+ /* Estilo para el encabezado */
+ h2 {
+     color: #2c3e50; /* Color del texto del encabezado */
+     margin-bottom: 20px; /* Espacio inferior */
+ }
+ 
+ /* Estilo para el formulario */
+ form {
+     background-color: #fff; /* Color de fondo del formulario */
+     padding: 20px; /* Espaciado interno */
+     border-radius: 5px; /* Bordes redondeados */
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+     width: 300px; /* Ancho del formulario */
+ }
+ 
+ /* Estilo para los campos de entrada */
+ input[type="text"],
+ input[type="password"] {
+     width: 100%; /* Ancho completo */
+     padding: 10px; /* Espaciado interno */
+     margin: 10px 0; /* Margen vertical */
+     border: 1px solid #ccc; /* Borde */
+     border-radius: 5px; /* Bordes redondeados */
+ }
+ 
+ /* Estilo para el botón */
+ button {
+     background-color: #2980b9; /* Color de fondo del botón */
+     color: white; /* Color del texto */
+     border: none; /* Sin borde */
+     padding: 10px; /* Espaciado interno */
+     border-radius: 5px; /* Bordes redondeados */
+     cursor: pointer; /* Cambiar cursor al pasar el mouse */
+     width: 100%; /* Ancho completo */
+ }
+ 
+ /* Cambios en el botón al pasar el mouse */
+ button:hover {
+     background-color: #1c6698; /* Color de fondo al pasar el mouse */
+ }
+ 
+ /* Estilo para los enlaces */
+ a {
+     color: #2980b9; /* Color del enlace */
+     text-decoration: none; /* Sin subrayado */
+ }
+ 
+ a:hover {
+     text-decoration: underline; /* Subrayado al pasar el mouse */
+ }
+ 
+ /* Estilo para párrafos */
+ p {
+     margin-top: 10px; /* Margen superior */
+ }
+ 

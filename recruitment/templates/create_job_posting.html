@@ -1,12 +1,39 @@
-{% extends "base.html" %}
+
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/create-job-posting.css' %}">
+{% endblock %}
 
 {% block content %}
+
 <h2>Crear nueva vacante</h2>
 
-<form method="POST">
+<!-- Formulario para crear una nueva vacante -->
+<form method="POST" class="edit-form">
     {% csrf_token %}
-    {{ form.as_p }}  <!-- Esto renderiza el formulario completo con etiquetas <p> -->
-    <button type="submit">Publicar Vacante</button>
+    <div class="form-group">
+        <label for="title">Título de la vacante:</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descripción:</label>
+        {{ form.description }}
+        {{ form.description.errors }}
+    </div>
+
+    <div class="form-group">
+        <label for="location">Ubicación:</label>
+        {{ form.location }}
+        {{ form.location.errors }}
+    </div>
+
+    <!-- Botón para publicar la vacante -->
+    <div class="form-group">
+        <button type="submit" class="btn-save">Publicar Vacante</button>
+    </div>
 </form>
 
 {% endblock %}

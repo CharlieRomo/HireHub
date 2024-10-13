@@ -1,56 +1,58 @@
-{% extends "base.html" %}
+
 
 {% block head %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/edit-intern-profile.css' %}">
 {% endblock %}
-
 {% block content %}
-  <h2>Editar Perfil de Empresa</h2>
-  
-  <!-- Formulario para editar el perfil de la empresa -->
-  <form method="POST">
-    {% csrf_token %}
-    
-    <!-- Campo para nombre de la empresa -->
-    <div>
-      <label for="company_name">Nombre de la empresa:</label>
-      {{ form.company_name }}  <!-- Renderiza el campo -->
-      {{ form.company_name.errors }} <!-- Muestra errores si los hay -->
-    </div>
 
-    <!-- Campo para sector de la empresa -->
-    <div>
-      <label for="sector">Sector de la empresa:</label>
-      {{ form.sector }}  <!-- Renderiza el campo -->
-      {{ form.sector.errors }} <!-- Muestra errores si los hay -->
-    </div>
+<h2>Editar Perfil de Empresa</h2>
 
-    <!-- Campo para descripción de la empresa -->
-    <div>
-      <label for="description">Descripción:</label>
-      {{ form.description }}  <!-- Renderiza el campo -->
-      {{ form.description.errors }} <!-- Muestra errores si los hay -->
-    </div>
+<!-- Formulario para editar el perfil de la empresa -->
+<form method="POST" class="edit-form">
+  {% csrf_token %}
 
-    <!-- Campo para página web de la empresa -->
-    <div>
-      <label for="website">Página web (opcional):</label>
-      {{ form.website }}  <!-- Renderiza el campo -->
-      {{ form.website.errors }} <!-- Muestra errores si los hay -->
-    </div>
+  <!-- Campo para nombre de la empresa -->
+  <div class="form-group">
+    <label for="company_name">Nombre de la empresa:</label>
+    {{ form.company_name }}
+    {{ form.company_name.errors }}
+  </div>
 
-    <!-- Botón para guardar los cambios -->
-    <button type="submit">Guardar</button>
-  </form>
-  
-  <!-- Mostrar los mensajes de éxito o error -->
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>  <!-- Mostrar el mensaje con su clase correspondiente -->
-      {% endfor %}
-    </ul>
-  {% endif %}
-  
+  <!-- Campo para sector de la empresa -->
+  <div class="form-group">
+    <label for="sector">Sector de la empresa:</label>
+    {{ form.sector }}
+    {{ form.sector.errors }}
+  </div>
+
+  <!-- Campo para descripción de la empresa -->
+  <div class="form-group">
+    <label for="description">Descripción:</label>
+    {{ form.description }}
+    {{ form.description.errors }}
+  </div>
+
+  <!-- Campo para página web de la empresa -->
+  <div class="form-group">
+    <label for="website">Página web (opcional):</label>
+    {{ form.website }}
+    {{ form.website.errors }}
+  </div>
+
+  <!-- Botón para guardar los cambios -->
+  <div class="form-group">
+    <button type="submit" class="btn-save">Guardar</button>
+  </div>
+</form>
+
+<!-- Mostrar los mensajes de éxito o error -->
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 {% endblock %}

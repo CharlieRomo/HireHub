@@ -1,0 +1,94 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+    color: #007BFF;
+}
+
+.profile-menu ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-menu ul li {
+    margin: 10px 0;
+}
+
+.profile-menu ul li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1.2em;
+}
+
+.profile-menu button {
+    background-color: #ff6347;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-menu button:hover {
+    background-color: #ff4500;
+}
+
+.content-section {
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.content-section h3 {
+    text-align: center;
+    font-size: 1.8em;
+    color: #007BFF;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+strong {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Progreso */
+.progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    width: 100%;
+    height: 15px;
+    margin-top: 10px;
+}
+
+.progress {
+    background-color: #007BFF;
+    height: 100%;
+    border-radius: 10px;
+}

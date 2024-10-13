@@ -1,21 +1,40 @@
-{% extends "base.html" %}
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/job-list.css' %}">
+{% endblock %}
 
 {% block content %}
-  <h2>Vacantes Disponibles</h2>
-  <ul>
+
+  <!-- Bloque de mensajes para mostrar éxito o error al postularse -->
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2 class="vacancy-title">Vacantes Disponibles</h2>
+
+  <!-- Botón para regresar al home del becario -->
+  <div class="back-to-home">
+    <a href="{% url 'intern_home' %}" class="btn-back-home">Regresar a Perfil</a>
+  </div>
+
+  <div class="vacancy-list">
     {% for job in jobs %}
-      <li>
-        <strong>{{ job.title }}</strong><br>
-        {{ job.description }}<br>
-        <a href="{% url 'job_detail' job.id %}">Ver detalles</a>
-        <!-- Botón para postularse -->
-        <form action="{% url 'apply_job' job.id %}" method="POST">
-          {% csrf_token %}
-          <button type="submit">Postularme</button>
-      </form>
-      
-        </form>
-      </li>
+      <div class="vacancy-card">
+        <h3>{{ job.title }}</h3>
+        <p>{{ job.description }}</p>
+        <div class="vacancy-actions">
+          <a href="{% url 'job_detail_intern' job.id %}" class="btn-detail">Ver detalles</a>
+          <form action="{% url 'apply_job' job.id %}" method="POST" class="apply-form">
+            {% csrf_token %}
+            <button type="submit" class="btn-apply">Postularme</button>
+          </form>
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
+
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'company_home' %}">Perfil de empresa</a></p>
+<h2>Eliminar Vacante</h2>
+<p>¿Estás seguro que deseas eliminar la vacante "<strong>{{ job_posting.title }}</strong>"?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirmar eliminación</button>
+</form>
+
+<p><a href="{% url 'my_job_postings' %}">Cancelar</a></p>
+{% endblock %}

@@ -1,4 +1,9 @@
-{% extends "base.html" %}
+
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/intern-home.css' %}">
+{% endblock %}
 
 {% block content %}
   <h2>Bienvenido, {{ user.company_name }}</h2>
@@ -7,12 +12,12 @@
     <ul>
       <li><a href="{% url 'edit_company_profile' %}">Editar Perfil de Empresa</a></li>
       <li><a href="{% url 'create_job_posting' %}">Crear Vacante</a></li>
-      <li><a href="{% url 'my_job_postings' %}">Mis Vacantes</a>
+      <li><a href="{% url 'view_applicants' %}">Ver postulantes</a></li>
+      <li>
         <form action="{% url 'logout' %}" method="POST" style="display:inline;">
           {% csrf_token %}
           <button type="submit">Cerrar sesión</button>
-      </form>
-      
+        </form>
       </li>
     </ul>
   </div>
@@ -20,12 +25,19 @@
   <div class="content-section">
     <h3>Mis Vacantes</h3>
     <p>En esta sección puedes ver las vacantes publicadas por tu empresa.</p>
+
+    {% if job_postings %}
+      <ul>
+        {% for job in job_postings %}
+          <li>
+            {{ job.title }} - {{ job.location }} 
+            <a href="{% url 'job_detail' job.id %}" class="btn-detail">Ver detalles</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No tienes vacantes publicadas.</p>
+    {% endif %}
   </div>
 
 {% endblock %}
-
-<!-- Formulario para cerrar sesión -->
-<form action="{% url 'logout' %}" method="POST" style="display: inline;">
-  {% csrf_token %}
-  <button type="submit">Cerrar sesión</button>
-</form>

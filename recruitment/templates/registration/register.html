@@ -1,13 +1,43 @@
 {% block head %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 
-<meta charset="UTF-8">
-<h2>Registro de usuario</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.non_field_errors }}  <!-- Mostrar errores generales -->
-  {{ form.as_p }}  <!-- Mostrar los campos del formulario -->
-  <button type="submit">Registrarse</button>
-</form>
+<div class="register-container">
+    <h2>Registro de usuario</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Nombre de usuario:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="first_name">Nombre:</label>
+            {{ form.first_name }}
+        </div>
+        <div class="form-group">
+            <label for="last_name">Apellidos:</label>
+            {{ form.last_name }}
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            {{ form.email }}
+        </div>
+        <div class="form-group">
+            <label for="user_type">Tipo de usuario:</label>
+            {{ form.user_type }}
+        </div>
+        <div class="form-group">
+            <label for="password1">Contraseña:</label>
+            {{ form.password1 }}
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirmar contraseña:</label>
+            {{ form.password2 }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn-custom">Registrarse</button>
+        </div>
+    </form>
+</div>
+

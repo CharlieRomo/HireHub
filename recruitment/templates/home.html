@@ -1,22 +1,75 @@
 {% block head %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
-<meta charset="UTF-8">
-<h1>Página principal de HireHub</h1>
-<p>Bienvenido a la plataforma de reclutamiento HireHub.</p>
+<header>
+  <div class="logo">
+    <h1>HireHub</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="#">Servicios</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+  <a href="{% url 'login' %}" class="btn">Iniciar sesión</a>
+</header>
 
-<!-- Misión y Visión -->
-<section>
-  <h2>Misión</h2>
-  <p>Nuestra misión en HireHub es conectar a los mejores talentos con las empresas más innovadoras, proporcionando una plataforma eficiente y accesible que facilita la búsqueda de empleo y el reclutamiento de profesionales altamente capacitados.</p>
-
-  <h2>Visión</h2>
-  <p>Ser la plataforma de referencia global en soluciones de empleo, revolucionando la manera en que las personas y las empresas se conectan, apoyando el desarrollo profesional y creando oportunidades para un futuro laboral más inclusivo y dinámico.</p>
+<section class="hero">
+  <div class="hero-content">
+    <h2>Conecta con los mejores talentos y transforma tu empresa</h2>
+    <p>La plataforma de reclutamiento más innovadora, optimizada para ti.</p>
+    <br>
+    <div class="cta-buttons">
+      <!-- Unificamos los botones en uno solo -->
+      <a href="{% url 'register' %}" class="btn-primary">Regístrate</a>
+    </div>
+  </div>
 </section>
 
-<form action="{% url 'login' %}" method="POST" style="display: inline;">
-  {% csrf_token %}
-  <button type="submit">Iniciar sesión</button>
-</form>
+<section class="benefits">
+  <h3>Beneficios de usar HireHub</h3>
+  <div class="benefit-cards">
+    <div class="card">
+      <h4>Conexión Rápida</h4>
+      <p>Encuentra a los mejores candidatos con nuestra plataforma eficiente.</p>
+    </div>
+    <div class="card">
+      <h4>Fácil de Usar</h4>
+      <p>Interfaz intuitiva diseñada para facilitar el proceso de reclutamiento.</p>
+    </div>
+    <div class="card">
+      <h4>Automatización</h4>
+      <p>Automatiza tareas tediosas y enfócate en lo que realmente importa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h3>Lo que dicen nuestros clientes</h3>
+  <blockquote>
+    <p>"HireHub nos ha permitido reducir el tiempo de contratación en un 50%. Una herramienta fantástica para empresas."</p>
+    <cite>— Empresa X</cite>
+  </blockquote>
+</section>
+
+<section class="mission-vision">
+  <div class="mission">
+    <h3>Misión</h3>
+    <p>Conectar a los mejores talentos con las empresas más innovadoras, proporcionando una plataforma eficiente.</p>
+  </div>
+  <div class="vision">
+    <h3>Visión</h3>
+    <p>Ser la plataforma de referencia global en soluciones de empleo, apoyando el desarrollo profesional de manera inclusiva.</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 HireHub. Todos los derechos reservados.</p>
+  <ul>
+    <li><a href="#">Política de Privacidad</a></li>
+    <li><a href="#">Términos y Condiciones</a></li>
+  </ul>
+</footer>

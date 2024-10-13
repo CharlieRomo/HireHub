@@ -14,6 +14,12 @@ class CustomUser(AbstractUser):
     # Campo para almacenar el tipo de usuario (empresa o becario)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
 
+    # Campos específicos para la empresa
+    company_name = models.CharField(max_length=255, blank=True, null=True)
+    sector = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
+
     # Campos específicos que forman parte del perfil (CV) del becario
     education = models.TextField(blank=True, null=True)  # Campo para educación
     work_experience = models.TextField(blank=True, null=True)  # Campo para experiencia laboral

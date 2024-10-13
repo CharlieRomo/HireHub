@@ -1,0 +1,22 @@
+
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/job-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="job-detail-container">
+    <h2>{{ job_posting.title }}</h2>
+
+    <div class="job-info">
+      <p>{{ job_posting.description }}</p>
+      <p><strong>Requisitos:</strong> {{ job_posting.requirements }}</p>
+      <p><strong>Publicado el:</strong> {{ job_posting.created_at|date:"d M Y" }}</p>
+    </div>
+
+    <div class="actions">
+      <a href="{% url 'list_jobs' %}" class="btn-back">Volver a mis vacantes</a>
+    </div>
+  </div>
+{% endblock %}

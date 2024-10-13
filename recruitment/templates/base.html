@@ -1,5 +1,3 @@
-
-
 {% load static %}  <!-- Cargar la biblioteca de etiquetas estáticas de Django -->
 
 <!DOCTYPE html>
@@ -10,18 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HireHub</title>
     <!-- Enlace a archivos estáticos como CSS -->
-    <link rel="stylesheet" href="{% static 'path/to/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
         <h1>HireHub</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'home' %}">Inicio</a></li>
                 <!-- Mostrar diferentes opciones según si el usuario está autenticado -->
                 {% if user.is_authenticated %}
-                    
-                    <li><a href="{% url 'edit_intern_profile' %}">Mi perfil</a></li> <!-- Puedes personalizar según el tipo de usuario -->
+                    <!-- Opciones para usuarios autenticados -->
                 {% else %}
                     <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
                     <li><a href="{% url 'register' %}">Registro</a></li>

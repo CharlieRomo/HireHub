@@ -101,7 +101,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles',  # Apunta a la carpeta 'staticfiles'
+    BASE_DIR / 'hirehub' / 'static',  # Apunta a la carpeta 'staticfiles'
 ]
 
 STATIC_ROOT = BASE_DIR / 'static_root'  # Esta es para producción, si usas collectstatic

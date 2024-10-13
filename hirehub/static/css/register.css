@@ -1,0 +1,70 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    background-color: white;
+    padding: 20px; /* Reducimos el padding */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    height: auto; /* Aseguramos que sea adaptable */
+    overflow: auto; /* Permite scroll interno si es necesario */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0072ff;
+}
+
+.form-group {
+    margin-bottom: 10px; /* Reducimos el espacio entre los elementos */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-custom {
+    width: 100%;
+    padding: 10px;
+    background-color: #0072ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.btn-custom:hover {
+    background-color: #005bb5;
+}
+
+@media (max-height: 700px) {
+    .register-container {
+        max-height: 95vh; /* Hace que el contenedor ocupe casi toda la pantalla */
+    }
+    body {
+        align-items: flex-start; /* Posicionamos el contenedor en la parte superior en pantallas pequeñas */
+    }
+}

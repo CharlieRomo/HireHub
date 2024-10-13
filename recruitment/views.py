@@ -5,6 +5,8 @@ from .forms import JobPostingForm, CompanyProfileForm, CustomUserCreationForm, I
 from .models import *  # Importar el modelo CustomUser
 from django.contrib.auth.decorators import login_required
 from .models import JobPosting, JobApplication
+from django.http import HttpResponseForbidden
+
 #hola
 # Vista para solicitar restablecimiento de contraseña
 def request_password_reset(request):
@@ -70,7 +72,7 @@ def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)  # Procesar el formulario
         if form.is_valid():
-            user = form.save()  # Guardar el usuario
+            user = form.save(commit=False)  # Guardar el usuario
             login(request, user)  # Loguear automáticamente
             # Redirigir según el tipo de usuario
             if user.user_type == 'company':
@@ -100,15 +102,16 @@ def custom_login(request):
     
     return render(request, 'registration/login.html')
 
-# Vista para la página de inicio de becarios
-def intern_home(request):
-    return render(request, 'intern_home.html')  # Renderizar la página de becarios
-
 # Vista para la página de inicio de empresas
+@login_required
 def company_home(request):
-    return render(request, 'company_home.html')  # Renderizar la página de empresas
+    # Obtener todas las vacantes publicadas por la empresa logueada
+    job_postings = JobPosting.objects.filter(company=request.user)
+    
+    return render(request, 'company_home.html', {'job_postings': job_postings})
 
 # Vista para la página principal
+@login_required
 def home(request):
     return render(request, 'home.html')  # Renderizar la página principal
 
@@ -175,9 +178,9 @@ def my_job_postings(request):
 
 @login_required
 def job_detail(request, job_id):
-    # Busca la vacante o lanza un error 404 si no existe
-    job_posting = get_object_or_404(JobPosting, id=job_id, company=request.user)
+    job_posting = get_object_or_404(JobPosting, id=job_id)
     return render(request, 'job_detail.html', {'job_posting': job_posting})
+
 
 @login_required
 def apply_job(request, job_id):
@@ -201,3 +204,51 @@ def apply_job(request, job_id):
 def intern_home(request):
     applications = JobApplication.objects.filter(intern=request.user)
     return render(request, 'intern_home.html', {'applications': applications})
+
+@login_required
+def edit_job_posting(request, job_id):
+    job_posting = get_object_or_404(JobPosting, id=job_id, company=request.user)
+
+    if request.method == 'POST':
+        form = JobPostingForm(request.POST, instance=job_posting)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Vacante actualizada con éxito.")
+            return redirect('my_job_postings')
+    else:
+        form = JobPostingForm(instance=job_posting)
+
+    return render(request, 'edit_job_posting.html', {'form': form})
+
+@login_required
+def delete_job_posting(request, job_id):
+    job_posting = get_object_or_404(JobPosting, id=job_id, company=request.user)
+
+    if request.method == 'POST':
+        job_posting.delete()
+        messages.success(request, "Vacante eliminada con éxito.")
+        return redirect('my_job_postings')
+
+    return render(request, 'confirm_delete_job_posting.html', {'job_posting': job_posting})
+
+@login_required
+def job_detail_intern(request, job_id):
+    # Busca la vacante o lanza un error 404 si no existe
+    job_posting = get_object_or_404(JobPosting, id=job_id)
+    return render(request, 'job_detail_intern.html', {'job_posting': job_posting})
+
+
+########## yo como empresa puedo ver los que aplican
+@login_required
+def view_applicants(request):
+    # Obtener todas las vacantes publicadas por la empresa
+    job_postings = JobPosting.objects.filter(company=request.user)
+
+    # Obtener todas las aplicaciones de estas vacantes
+    applications = JobApplication.objects.filter(job__in=job_postings)
+
+    return render(request, 'view_applicants.html', {'applications': applications})
+
+##################################
+
+

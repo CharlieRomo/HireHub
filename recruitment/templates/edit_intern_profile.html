@@ -1,64 +1,85 @@
-{% extends "base.html" %}
-
 {% block head %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  {% endblock %}
+  <link rel="stylesheet" href="{% static 'css/edit-intern-profile.css' %}">
+{% endblock %}
 
 {% block content %}
-  <h2>Editar Perfil de Becario</h2>
   
+  <h2>Editar Perfil de Becario</h2>
+
   <!-- Formulario para editar el perfil del becario -->
-  <form method="POST">
+  <form method="POST" class="edit-form">
     {% csrf_token %}
-    
+
+    <!-- Campo para nombre -->
+    <div class="form-group">
+      <label for="first_name">Nombre:</label>
+      {{ form.first_name }}  <!-- Campo para el nombre -->
+      {{ form.first_name.errors }}
+    </div>
+
+    <!-- Campo para apellido -->
+    <div class="form-group">
+      <label for="last_name">Apellido:</label>
+      {{ form.last_name }}  <!-- Campo para el apellido -->
+      {{ form.last_name.errors }}
+    </div>
+
+    <!-- Campo para email -->
+    <div class="form-group">
+      <label for="email">Correo Electrónico:</label>
+      {{ form.email }}  <!-- Campo para el email -->
+      {{ form.email.errors }}
+    </div>
+
     <!-- Campo para estudios -->
-    <div>
+    <div class="form-group">
       <label for="education">Estudios:</label>
       {{ form.education }}  <!-- Renderiza el campo con su etiqueta de ayuda -->
-      {{ form.education.errors }} <!-- Muestra errores si los hay -->
+      {{ form.education.errors }}
     </div>
 
     <!-- Campo para experiencia laboral -->
-    <div>
+    <div class="form-group">
       <label for="work_experience">Experiencia laboral:</label>
-      {{ form.work_experience }}  <!-- Renderiza el campo -->
-      {{ form.work_experience.errors }} <!-- Muestra errores si los hay -->
+      {{ form.work_experience }}
+      {{ form.work_experience.errors }}
     </div>
 
     <!-- Campo para habilidades -->
-    <div>
+    <div class="form-group">
       <label for="skills">Habilidades:</label>
-      {{ form.skills }}  <!-- Renderiza el campo -->
-      {{ form.skills.errors }} <!-- Muestra errores si los hay -->
+      {{ form.skills }}
+      {{ form.skills.errors }}
     </div>
 
     <!-- Campo para idiomas -->
-    <div>
+    <div class="form-group">
       <label for="languages">Idiomas:</label>
-      {{ form.languages }}  <!-- Renderiza el campo -->
-      {{ form.languages.errors }} <!-- Muestra errores si los hay -->
+      {{ form.languages }}
+      {{ form.languages.errors }}
     </div>
 
     <!-- Certificaciones -->
-    <div>
+    <div class="form-group">
       <label for="certifications">Certificaciones:</label>
-      {{ form.certifications }}  <!-- Renderiza el campo -->
-      {{ form.certifications.errors }} <!-- Muestra errores si los hay -->
+      {{ form.certifications }}
+      {{ form.certifications.errors }}
     </div>
-    
 
     <!-- Botón para guardar los cambios -->
-    <button type="submit">Guardar</button>
+    <div class="form-group">
+      <button type="submit" class="btn-save">Guardar</button>
+    </div>
   </form>
-  
+
   <!-- Mostrar los mensajes de éxito o error -->
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>  <!-- Mostrar el mensaje con su clase correspondiente -->
+        <li class="{{ message.tags }}">{{ message }}</li>
       {% endfor %}
     </ul>
   {% endif %}
-  
+
 {% endblock %}
