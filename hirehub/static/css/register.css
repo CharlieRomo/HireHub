@@ -1,70 +1,137 @@
+/* Importamos la fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #00c6ff, #0072ff);
-    height: 100vh;
+    background: linear-gradient(to right, #00c6ff, #0072ff); /* Degradado en el fondo */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .register-container {
     background-color: white;
-    padding: 20px; /* Reducimos el padding */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
     width: 100%;
-    height: auto; /* Aseguramos que sea adaptable */
-    overflow: auto; /* Permite scroll interno si es necesario */
+    max-height: 95vh;
+    overflow-y: auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.register-container::before {
+    content: '';
+    position: absolute;
+    top: -250px; /* Movemos la curva superior más arriba */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 150px;
+    background-color: #0072ff;
+    border-radius: 0 0 80% 80% / 30% 30% 0 0;
+    z-index: -1;
+}
+
+.register-container::after {
+    content: '';
+    position: absolute;
+    bottom: -300px; /* Movemos la curva inferior aún más abajo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 150px;
+    background-color: #0072ff;
+    border-radius: 80% 80% 0 0 / 30% 30% 0 0;
+    z-index: -1;
 }
 
 h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #0072ff;
+    font-size: 28px;
+    color: #0072ff; /* El título ahora es azul para visibilidad */
+    margin-bottom: 30px;
+    font-weight: 600;
+    z-index: 2;
+    position: relative;
 }
 
 .form-group {
-    margin-bottom: 10px; /* Reducimos el espacio entre los elementos */
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    font-weight: 500;
+    color: #333;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #0072ff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
 
 .btn-custom {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     background-color: #0072ff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+    margin-bottom: 20px; /* Añadimos un margen inferior para separar el botón de la curva */
 }
 
 .btn-custom:hover {
-    background-color: #005bb5;
+    background-color: #0056b3;
+    transform: translateY(-3px);
 }
 
-@media (max-height: 700px) {
+.btn-custom:active {
+    background-color: #003f7f;
+    transform: translateY(0);
+}
+
+a {
+    color: #0072ff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
     .register-container {
-        max-height: 95vh; /* Hace que el contenedor ocupe casi toda la pantalla */
-    }
-    body {
-        align-items: flex-start; /* Posicionamos el contenedor en la parte superior en pantallas pequeñas */
+        padding: 20px;
+        width: 100%;
     }
 }
