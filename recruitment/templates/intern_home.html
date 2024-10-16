@@ -28,15 +28,26 @@
           <!-- Medidor de progreso -->
           <div class="progress-bar">
             <div class="progress" style="width: 
-              {% if application.status == 'applied' %}25%
-              {% elif application.status == 'interview' %}50%
-              {% elif application.status == 'rejected' %}100%
-              {% elif application.status == 'hired' %}100%
-              {% endif %};"></div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
+                {% if application.status == 'applied' %}25%
+                {% elif application.status == 'interview' %}50%
+                {% elif application.status == 'hired' %}100%
+                {% elif application.status == 'rejected' %}100%
+                {% endif %};"></div>
+        </div>
+        </div>
+
+        <!-- Botón para eliminar la postulación -->
+        <div>
+          <form action="{% url 'delete_application' application.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">
+              Eliminar
+            </button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views  # Importa las vistas de autenticación de Django
 from . import views
+from .views import delete_application
 
 urlpatterns = [
     path('register/', views.register, name='register'),  # Ruta para el registro
@@ -31,6 +32,13 @@ urlpatterns = [
     path('vacante/<int:job_id>/eliminar/', views.delete_job_posting, name='delete_job_posting'),
 
     path('view_applicants/', views.view_applicants, name='view_applicants'),
+#####borrar aplicacion como becario
+    path('delete_application/<int:application_id>/', delete_application, name='delete_application'),
+##############rechazar a becario o avanzar
+    path('advance_application/<int:application_id>/', views.advance_application, name='advance_application'),
+    path('reject_application/<int:application_id>/', views.reject_application, name='reject_application'),
 
+    ################
+   
 ]
 

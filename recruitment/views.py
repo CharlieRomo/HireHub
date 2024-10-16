@@ -6,7 +6,7 @@ from .models import *  # Importar el modelo CustomUser
 from django.contrib.auth.decorators import login_required
 from .models import JobPosting, JobApplication
 from django.http import HttpResponseForbidden
-
+from django.urls import reverse
 #hola
 # Vista para solicitar restablecimiento de contraseña
 def request_password_reset(request):
@@ -251,4 +251,44 @@ def view_applicants(request):
 
 ##################################
 
+@login_required
+def delete_application(request, application_id):
+    application = get_object_or_404(JobApplication, id=application_id, intern=request.user)
+    
+    if request.method == 'POST':
+        application.delete()
+        messages.success(request, 'Tu postulación ha sido eliminada exitosamente.')
+        return redirect('intern_home')
+    
+    return redirect('intern_home')
 
+
+@login_required
+def advance_application(request, application_id):
+    application = get_object_or_404(JobApplication, id=application_id)
+
+    # Ciclo de los estados: avanzamos en el flujo lógico
+    if application.status == 'applied':
+        application.status = 'interview'  # Avanza de 'applied' a 'interview'
+    elif application.status == 'interview':
+        application.status = 'hired'  # Avanza de 'interview' a 'hired'
+    elif application.status == 'rejected':
+        application.status = 'applied'  # Si está rechazado, vuelve a 'applied'
+    elif application.status == 'hired':
+        # Si ya está en 'hired', no permitimos avanzar más
+        messages.warning(request, 'El candidato ya ha sido contratado y no puede avanzar más.')
+        return redirect('view_applicants')
+
+    application.save()  # Guardar el cambio
+
+    # Mensaje de éxito cuando se avanza correctamente
+    messages.success(request, 'El estado de la postulación ha sido actualizado.')
+
+    return redirect('view_applicants')
+
+@login_required
+def reject_application(request, application_id):
+    application = get_object_or_404(JobApplication, id=application_id)
+    application.status = 'rejected'
+    application.save()
+    return redirect('view_applicants')

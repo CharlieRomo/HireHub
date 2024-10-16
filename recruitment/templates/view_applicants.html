@@ -3,8 +3,20 @@
   <link rel="stylesheet" href="{% static 'css/view_applicants.css' %}">
 {% endblock %}
 
-
 {% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2 class="page-title">Lista de Postulantes</h2>
+
+<table class="applicant-table">
+<!-- Resto del código de la tabla -->
 <h2 class="page-title">Lista de Postulantes</h2>
 
 <table class="applicant-table">
@@ -14,6 +26,8 @@
             <th>Email</th>
             <th>Vacante a la que postuló</th>
             <th>Estado</th>
+            <th>Progreso</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -23,10 +37,35 @@
                 <td>{{ application.intern.email }}</td>
                 <td>{{ application.job.title }}</td>
                 <td>{{ application.status }}</td>
+                
+                <!-- Barra de progreso -->
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 
+                            {% if application.status == 'applied' %}25%
+                            {% elif application.status == 'interview' %}50%
+                            {% elif application.status == 'rejected' %}100%
+                            {% elif application.status == 'hired' %}100%
+                            {% endif %};"></div>
+                    </div>
+                </td>
+                
+                <!-- Botones de avance/rechazo -->
+                <td>
+                    <form action="{% url 'advance_application' application.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-action">Avanzar</button>
+                    </form>
+                    
+                    <form action="{% url 'reject_application' application.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-action btn-danger">Rechazar</button>
+                    </form>
+                </td>
             </tr>
         {% empty %}
             <tr>
-                <td colspan="4">No hay postulantes para mostrar.</td>
+                <td colspan="6">No hay postulantes para mostrar.</td>
             </tr>
         {% endfor %}
     </tbody>
